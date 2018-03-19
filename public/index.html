@@ -1,0 +1,49 @@
+<html ng-app="ResearchersListApp">
+
+<head>
+    <title>
+        Researchers List
+    </title>
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
+    <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
+    <script type="text/javascript" src="researchers-list-app.js"></script>
+    <script type="text/javascript" src="list-ctrl.js"></script>
+    <link rel="stylesheet" href="styles.css" type="text/css" />
+</head>
+
+<body ng-controller="ListCtrl">
+    <div class="jumbotron text-center">
+  <h1> Researchers</h1>
+  
+</div>
+<div class="row">
+  
+
+    <table class="center table table-responsive" >
+        <thead>
+            <tr>
+                <th> Name</th>
+                <th> Email</th>
+                <th> Research Group</th>
+                 <th>&nbsp;</th>
+                    
+                </th>
+            </tr>
+        </thead>
+         <tr>
+                <td><input class="form-control" ng-model="newResearcher.name"></td>
+                <td><input class="form-control" ng-model="newResearcher.mail"></td>
+                <td><input class="form-control" ng-model="newResearcher.researchGroup"></td>
+                <td><button class="btn btn-primary" ng-click="addResearcher()">Add Researcher</button> </td>
+            </tr>
+
+        <tr ng-repeat="researcher in researchers">
+            <td> {{researcher.name}}</td>
+            <td> {{researcher.mail}}</td>
+            <td> {{researcher.researchGroup}}</td>
+        </tr>
+    </table>
+ 
+    </body>
+
+</html>
