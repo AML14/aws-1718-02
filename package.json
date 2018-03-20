@@ -1,5 +1,5 @@
 {
-  "name": "aws1718-03",
+  "name": "aws1718-02",
   "version": "1.0.0",
   "description": "Microservice to manage researchers resources",
   "main": "index.js",
@@ -7,7 +7,7 @@
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "G03",
+  "author": "G02",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.2",
