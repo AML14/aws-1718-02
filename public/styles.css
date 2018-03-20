@@ -1,6 +1,15 @@
-
 .center {
-    margin: auto;
-    width: 60%;
-    padding: 10px;
+  margin: auto;
+  width: 60%;
+  padding: 10px;
+}
+
+.clickable-table-row {
+  cursor: pointer;
+}
+
+.float-bottom-right {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
 }
