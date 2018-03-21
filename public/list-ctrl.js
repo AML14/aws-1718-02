@@ -5,6 +5,11 @@ angular
 		function refresh() {
 			$http.get("api/v1/researchers").then(function (response) {
 				$scope.researchers = response.data;
+				// console.log($scope.researchers.length);
+				// $scope.showsEditFields = new Array(60);
+				// console.log($scope.showsEditFields);
+				// $scope.showsEditFields.fill(false);
+				// console.log($scope.showsEditFields);
 			});
 		}
 		$scope.addResearcher = function () {
@@ -14,7 +19,12 @@ angular
 					refresh();
 				});
 		}
-		refresh();
 
+		$scope.showEditFields = false;
+		$scope.toggleEditFields = function () {
+			$scope.showEditFields = !$scope.showEditFields;
+		};
+
+		refresh();
 
 	});

@@ -5,6 +5,7 @@
 		Researchers List
 	</title>
   <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
+  <link rel="stylesheet" href="/open-iconic/font/css/open-iconic-bootstrap.css" />
   <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
   <script type="text/javascript" src="/bower_components/popper.js/dist/umd/popper.min.js"></script>
   <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -16,18 +17,84 @@
 
 <body ng-controller="ListCtrl">
 	<div class="jumbotron text-center">
-		<h1> Researchers</h1>
+		<h1>Researchers</h1>
   </div>
-  
-	<div class="center table-responsive">
-		<table class="table">
-			<tr class="clickable-table-row" ng-repeat="researcher in researchers">
-				<td>{{researcher.name}}</td>
-				<td>{{researcher.mail}}</td>
-				<td>{{researcher.researchGroup}}</td>
-			</tr>
-    </table>
+
+  <div class="container" id="accordion">
+    <div class="card" ng-repeat="researcher in researchers" ng-cloak>
+      <div class="card-header" id="heading-{{researcher.orcid}}">
+        <div class="row justify-content-between">
+          <h5 class="col-5 mb-0">
+            <button class="btn btn-link" data-toggle="collapse" data-target="#collapse-{{researcher.orcid}}" aria-expanded="false" aria-controls="collapse-{{researcher.orcid}}">
+              {{researcher.name}}
+            </button>
+          </h5>
+          <h5 class="col-4 mb-0">
+            <a class="btn btn-link" href="mailto:{{researcher.mail}}" role="button">
+              {{researcher.mail}}
+            </a>
+          </h5>
+          <div class="row justify-content-between col-3">
+            <h5 class="mb-0">
+              <a class="btn btn-link" href="{{researcher.researchGroup.website}}" target="_blank" role="button">
+                {{researcher.researchGroup.name}}
+              </a>
+            </h5>
+            <img class="expand-arrow align-self-center" src="./img/arrow-down-128.png" data-toggle="collapse" data-target="#collapse-{{researcher.orcid}}" aria-expanded="false" aria-controls="collapse-{{researcher.orcid}}"/>
+          </div>
+        </div>
+      </div>
+      <div id="collapse-{{researcher.orcid}}" class="collapse" aria-labelledby="heading-{{researcher.orcid}}" data-parent="#accordion">
+        <div class="card-body">
+          <div ng-show="showEditFields">
+            <div class="input-group input-group-sm mb-2">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-phone">Phone</span>
+              </div>
+              <input type="text" class="form-control" aria-label="Phone" aria-describedby="inputGroup-phone" ng-model="researcher.phone">
+            </div>
+            <div class="input-group input-group-sm mb-2">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-website">Website</span>
+              </div>
+              <input type="text" class="form-control" aria-label="Website" aria-describedby="inputGroup-website" ng-model="researcher.website">
+            </div>
+            <div class="input-group input-group-sm mb-2">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-orcid">ORCID</span>
+              </div>
+              <input type="text" class="form-control" aria-label="ORCID" aria-describedby="inputGroup-orcid" ng-model="researcher.ORCID">
+            </div>
+            <div class="input-group input-group-sm mb-2">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-researcherID">ResearcherID</span>
+              </div>
+              <input type="text" class="form-control" aria-label="ResearcherID" aria-describedby="inputGroup-researcherID" ng-model="researcher.researcherID">
+            </div>
+            <!-- TODO: Add here CANCEL and SEND buttons -->
+            <div class="row align-self-end justify-content-center">
+                <button type="button" class="btn btn-outline-danger mx-1" ng-click="toggleEditFields()">Cancel</button>
+                <button type="button" class="btn btn-outline-success mx-1">Update</button>
+              </div>
+          </div> 
+          <div ng-show="!showEditFields">
+            <p><b>Phone:</b> {{researcher.phone}}</p>
+            <p><b>Website:</b> <a href="{{researcher.website}}" target="_blank">{{researcher.website}}</a></p>
+            <p><b>ORCID:</b> {{researcher.ORCID}}</p>
+            <p><b>ResearcherID:</b> {{researcher.researcherID}}</p>
+            <div class="row align-self-end justify-content-center">
+              <button type="button" class="btn btn-outline-secondary mx-1" ng-click="toggleEditFields()">Edit</button>
+              <button type="button" class="btn btn-outline-danger mx-1">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+
+  <!-- <footer class="footer">
+    <a class="text-muted" href="#">Postman documentation</span>
+  </footer> -->
 
   <button class="btn btn-primary float-bottom-right" data-toggle="modal" data-target="#addResearcherModal">
     + Add researcher

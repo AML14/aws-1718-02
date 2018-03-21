@@ -41,7 +41,7 @@ app.delete(baseAPI + "/researchers", (req, res) => {
 });
 
 app.get(baseAPI + "/researchers/:orcid", (req, res) => {
-	console.log("GET /researchers/" + orcid);
+	console.log("GET /researchers/" + req.params.orcid);
 	var orcid = req.params.orcid;
 	researchers.get(orcid, (err, researchers) => {
 		if (researchers.length === 0) {
@@ -54,12 +54,15 @@ app.get(baseAPI + "/researchers/:orcid", (req, res) => {
 });
 
 app.post(baseAPI + "/researchers/:orcid", (req, res) => {
-	console.log("POST /researchers/" + orcid);
+	console.log("POST /researchers/" + req.params.orcid);
 	res.sendStatus(405);
 });
 
+
+// TODO: check if attempting to change ORCID and prevent it
+// TODO: in the DB, change only the fields passed in the request
 app.put(baseAPI + "/researchers/:orcid", (req, res) => {
-	console.log("PUT /researchers/" + orcid);
+	console.log("PUT /researchers/" + req.params.orcid);
 	var orcid = req.params.orcid;
 	var updatedResearcher = req.body;
 	researchers.update(orcid, updatedResearcher, (err, numUpdates) => {
@@ -74,7 +77,7 @@ app.put(baseAPI + "/researchers/:orcid", (req, res) => {
 });
 
 app.delete(baseAPI + "/researchers/:orcid", (req, res) => {
-	console.log("DELETE /researchers/" + orcid);
+	console.log("DELETE /researchers/" + req.params.orcid);
 	var orcid = req.params.orcid;
 	researchers.remove(orcid, (err, numRemoved) => {
 		console.log("researchers removed:" + numRemoved);

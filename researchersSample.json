@@ -5,7 +5,10 @@
   "ORCID": "0000-0001-9827-1834",
   "researcherID": "B-9056-2008",
   "website": "https://scholar.google.es/citations?user=Ka-FHBQAAAAJ&hl=en",
-  "researchGroup": "ISA",
+  "researchGroup": {
+    "name": "ISA",
+    "website": "http://www.isa.us.es"
+  },
   "department": "LSI",
   "university": "US",
   "projects": [
