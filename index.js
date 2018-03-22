@@ -13,6 +13,13 @@ var app = express();
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 
+// Postman documentation
+app.get(baseAPI + "/researchers/help", (req, res) => {
+	console.log("GET Postman documentation");
+	res.redirect('https://documenter.getpostman.com/view/3947164/aws1718-02/RVncfHHP');
+});
+
+// API routes
 app.get(baseAPI + "/researchers", (req, res) => {
 	console.log("GET /researchers");
 	researchers.allResearchers((err, resResearchers) => {
@@ -69,8 +76,6 @@ app.post(baseAPI + "/researchers/:orcid", (req, res) => {
 	res.sendStatus(405);
 });
 
-
-// TODO: check if attempting to change ORCID and prevent it
 app.put(baseAPI + "/researchers/:orcid", (req, res) => {
 	console.log("PUT /researchers/" + req.params.orcid);
 	console.log(req);
@@ -98,7 +103,11 @@ app.delete(baseAPI + "/researchers/:orcid", (req, res) => {
 	var orcid = req.params.orcid;
 	researchers.remove(orcid, (err, numRemoved) => {
 		console.log("researchers removed:" + numRemoved);
-		res.sendStatus(200);
+		if (numRemoved != 0) {
+			res.sendStatus(200);
+		} else {
+			res.sendStatus(404);
+		}
 	});
 });
 
