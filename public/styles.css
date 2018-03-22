@@ -1,16 +1,33 @@
+body {
+  margin-bottom: 80px;
+}
+
 img.expand-arrow {
   height: 12px;
   cursor: pointer;
   opacity: 0.5;
 }
 
-.float-bottom-right {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
+input[disabled] {
+  cursor: not-allowed;
 }
 
-/* .footer {
+/* .form-control:disabled, .form-control[readonly] {
+  background-color: #ddd;
+} */
+
+.top-right-buttons {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+}
+
+.top-right-buttons > div > button {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.footer {
   position: fixed;
   left: 0;
   bottom: 0;
@@ -19,4 +36,4 @@ img.expand-arrow {
   line-height: 60px;
   text-align: left;
   background-color: #f5f5f5;
-} */
+}

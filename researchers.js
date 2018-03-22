@@ -25,15 +25,15 @@ Researchers.prototype.removeAll = function(callback) {
 };
 
 Researchers.prototype.get = function(orcid, callback) {
-	return db.find({orcid:orcid}, callback);
+	return db.find({ORCID:orcid}, callback);
 };
 
 Researchers.prototype.remove = function(orcid, callback) {
-	return db.remove({orcid:orcid}, {multi: true}, callback);
+	return db.remove({ORCID:orcid}, {multi: true}, callback);
 };
 
 Researchers.prototype.update = function(orcid, updatedResearcher, callback) {
-	return db.update({orcid:orcid}, updatedResearcher, {}, callback);
+	return db.update({ORCID:orcid}, updatedResearcher, {}, callback);
 };
 
 module.exports = new Researchers();

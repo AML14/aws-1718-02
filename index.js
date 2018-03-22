@@ -15,16 +15,26 @@ app.use(bodyParser.json());
 
 app.get(baseAPI + "/researchers", (req, res) => {
 	console.log("GET /researchers");
-	researchers.allResearchers((err, researchers) => {
-		res.send(researchers);
+	researchers.allResearchers((err, resResearchers) => {
+		res.send(resResearchers.map(researcher => {
+			delete researcher._id;
+			return researcher;
+		}));
 	});
 });
 
 app.post(baseAPI + "/researchers", (req, res) => {
 	console.log("POST /researchers");
 	var researcher = req.body;
-	researchers.add(researcher);
-	res.sendStatus(201);
+	researchers.get(researcher.ORCID, (err, resResearchers) => {
+		if (resResearchers.length === 0) {
+			researchers.add(researcher);
+			res.sendStatus(201);
+		}
+		else {
+			res.status(409).send('Resource already exists');
+		}
+	});
 });
 
 app.put(baseAPI + "/researchers", (req, res) => {
@@ -48,6 +58,7 @@ app.get(baseAPI + "/researchers/:orcid", (req, res) => {
 			res.sendStatus(404);
 		}
 		else {
+			delete researchers[0]._id;
 			res.send(researchers[0]);
 		}
 	});
@@ -60,20 +71,26 @@ app.post(baseAPI + "/researchers/:orcid", (req, res) => {
 
 
 // TODO: check if attempting to change ORCID and prevent it
-// TODO: in the DB, change only the fields passed in the request
 app.put(baseAPI + "/researchers/:orcid", (req, res) => {
 	console.log("PUT /researchers/" + req.params.orcid);
-	var orcid = req.params.orcid;
+	console.log(req)
 	var updatedResearcher = req.body;
-	researchers.update(orcid, updatedResearcher, (err, numUpdates) => {
-		console.log("researchers updated:" + numUpdates);
-		if (numUpdates === 0) {
-			res.sendStatus(404);
-		}
-		else {
-			res.sendStatus(200);
-		}
-	});
+	if (updatedResearcher.ORCID) {
+		res.status(400).send('ORCID field cannot be updated');
+	}
+	else {
+		var orcid = req.params.orcid;
+		updatedResearcher.ORCID = orcid;
+		researchers.update(orcid, updatedResearcher, (err, numUpdates) => {
+			console.log("researchers updated:" + numUpdates);
+			if (numUpdates === 0) {
+				res.sendStatus(404);
+			}
+			else {
+				res.sendStatus(200);
+			}
+		});
+	}
 });
 
 app.delete(baseAPI + "/researchers/:orcid", (req, res) => {
