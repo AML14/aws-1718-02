@@ -73,7 +73,7 @@ app.post(baseAPI + "/researchers/:orcid", (req, res) => {
 // TODO: check if attempting to change ORCID and prevent it
 app.put(baseAPI + "/researchers/:orcid", (req, res) => {
 	console.log("PUT /researchers/" + req.params.orcid);
-	console.log(req)
+	console.log(req);
 	var updatedResearcher = req.body;
 	if (updatedResearcher.ORCID) {
 		res.status(400).send('ORCID field cannot be updated');
