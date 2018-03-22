@@ -5,6 +5,7 @@ angular
 		function refresh() {
 			$http.get("api/v1/researchers").then(function (response) {
 				$scope.researchers = response.data;
+				$scope.copyResearchers = angular.copy($scope.researchers);
 			});
 		}
 
