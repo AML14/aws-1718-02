@@ -59,7 +59,7 @@ angular
 		}
 
 		$scope.modifyResearcher = function (orcid) {
-			var researcher = _.find($scope.researchers, {'ORCID': orcid});
+			var researcher = _.find(angular.copy($scope.researchers), {'ORCID': orcid});
 			delete researcher.ORCID;
 			$http
 				.put("/api/v1/researchers/"+orcid+"?apikey="+$scope.apikey, researcher)
