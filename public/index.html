@@ -18,7 +18,9 @@
 
 <body ng-controller="ListCtrl">
 	<div class="jumbotron">
-    <h1 class="text-center">Researchers</h1>
+    <h1 class="display-4">Researchers</h1>
+    <p class="p-condensed lead">A microservice to manage researcher resources. You can see currently active researchers, add new ones, modify or delete them. Just about anything.</p>
+    <input type="text" class="form-control mt-3 narrow" placeholder="Enter your apikey here" ng-model="apikey">
     <div class="top-right-buttons">
       <div class="row justify-content-end">
         <button type="button" class="btn btn-link text-primary" data-toggle="modal" data-target="#addResearcherModal">+ Add researcher</button>
@@ -29,6 +31,17 @@
     </div>
   </div>
 
+  <form name="getResearcherForm">
+    <div class="row justify-content-center">
+      <div class="col-3 input-group">
+        <input type="text" name="currentOrcid" class="form-control" placeholder="Researcher's ORCID" aria-label="Researcher's ORCID" ng-model="currentOrcid" ng-class="{'is-invalid': !getResearcherForm.currentOrcid.$valid}" ng-pattern="/^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}$/" required>
+        <div class="input-group-append">
+          <button ng-disabled="!getResearcherForm.currentOrcid.$valid" class="btn btn-outline-secondary" type="button" ng-click="getResearcher(); currentOrcid = ''; hideEditFields();">Send</button>
+        </div>
+      </div>
+      <button class="col-3 btn btn-outline-secondary" type="button" ng-click="getResearchers(); hideEditFields();">Show all researchers</button>
+    </div>
+  </form>
   <div class="container" id="accordion">
     <div class="card" ng-repeat="researcher in researchers" ng-cloak>
       <div class="card-header" id="heading-{{researcher.ORCID}}">
@@ -140,12 +153,6 @@
     </div>
   </div>
 
-  <footer class="footer">
-    <div class="container">
-      <a class="text-muted" href="api/v1/researchers/help">Postman documentation</span>
-    </div>
-  </footer>
-
   <!-- Add researcher modal -->
   <div class="modal fade" id="addResearcherModal">
     <div class="modal-dialog modal-lg">
@@ -196,7 +203,7 @@
             <div class="input-group-prepend">
               <span class="input-group-text" id="inputGroup-new-orcid">ORCID</span>
             </div>
-            <input ng-class="{'is-invalid': !addResearcherForm.orcid.$valid}" name="orcid" required ng-pattern="/^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}$/" type="text" required name="orcid" class="form-control"  aria-label="ORCID" aria-describedby="inputGroup-new-orcid" ng-model="newResearcher.ORCID">
+            <input ng-class="{'is-invalid': !addResearcherForm.orcid.$valid}" ng-pattern="/^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}$/" type="text" required name="orcid" class="form-control"  aria-label="ORCID" aria-describedby="inputGroup-new-orcid" ng-model="newResearcher.ORCID">
           </div>
           <div class="input-group input-group-sm mb-1">
             <div class="input-group-prepend">
@@ -262,6 +269,16 @@
       </div>
     </div>
   </div>
+
+  <footer class="footer-up">
+      <div class="container">
+      </div>
+    </footer>
+  <footer class="footer">
+    <div class="container">
+      <a class="text-muted" href="api/v1/researchers/help" target="_blank">Postman documentation</span>
+    </div>
+  </footer>
 </body>
 
 </html>

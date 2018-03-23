@@ -19,6 +19,18 @@ app.get(baseAPI + "/researchers/help", (req, res) => {
 	res.redirect('https://documenter.getpostman.com/view/3947164/aws1718-02/RVncfHHP');
 });
 
+// Authentication middleware
+app.use((req, res, next) => {
+	const apikey = req.query.apikey;
+	if (!apikey) {
+		res.sendStatus(401);
+	} else if (apikey != "asdf1234") {
+		res.sendStatus(403);
+	} else {
+		next();
+	}
+});
+
 // API routes
 app.get(baseAPI + "/researchers", (req, res) => {
 	console.log("GET /researchers");
