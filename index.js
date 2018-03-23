@@ -5,6 +5,8 @@ var bodyParser = require("body-parser");
 var path = require('path');
 var researchers = require("./researchers.js");
 
+var config = require('./config');
+
 var port = (process.env.PORT || 15000);
 var baseAPI = "/api/v1";
 
@@ -23,9 +25,9 @@ app.get(baseAPI + "/researchers/help", (req, res) => {
 app.use((req, res, next) => {
 	const apikey = req.query.apikey;
 	if (!apikey) {
-		res.sendStatus(401);
-	} else if (apikey != "asdf1234") {
-		res.sendStatus(403);
+		res.status(401).send('Apikey required');
+	} else if (apikey != config.apikey) {
+		res.status(403).send('Invalid apikey');
 	} else {
 		next();
 	}
@@ -74,7 +76,7 @@ app.get(baseAPI + "/researchers/:orcid", (req, res) => {
 	var orcid = req.params.orcid;
 	researchers.get(orcid, (err, researchers) => {
 		if (researchers.length === 0) {
-			res.sendStatus(404);
+			res.status(404).send('There\'s no researcher with that ORCID');
 		}
 		else {
 			delete researchers[0]._id;

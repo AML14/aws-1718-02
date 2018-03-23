@@ -1,8 +1,8 @@
-<html ng-app="ResearchersListApp">
+<html ng-app="ResearchersApp">
 
 <head>
 	<title>
-		Researchers List
+		Researchers App
 	</title>
   <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
   <link rel="stylesheet" href="/open-iconic/font/css/open-iconic-bootstrap.css" />
@@ -11,12 +11,12 @@
   <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
   <script type="text/javascript" src="/bower_components/lodash/lodash.js"></script>
-	<script type="text/javascript" src="researchers-list-app.js"></script>
-	<script type="text/javascript" src="list-ctrl.js"></script>
+	<script type="text/javascript" src="researchers-app.js"></script>
+	<script type="text/javascript" src="researchers-ctrl.js"></script>
 	<link rel="stylesheet" href="styles.css" type="text/css" />
 </head>
 
-<body ng-controller="ListCtrl">
+<body ng-controller="ResearchersCtrl">
 	<div class="jumbotron">
     <h1 class="display-4">Researchers</h1>
     <p class="p-condensed lead">A microservice to manage researcher resources. You can see currently active researchers, add new ones, modify or delete them. Just about anything.</p>
@@ -42,6 +42,7 @@
       <button class="col-3 btn btn-outline-secondary" type="button" ng-click="getResearchers(); hideEditFields();">Show all researchers</button>
     </div>
   </form>
+  <p class="text-center container mt-5" ng-show="!researchers">Look for a specific researcher or get all of them by using the buttons above. Don't forget to attach your apikey!</p>
   <div class="container" id="accordion">
     <div class="card" ng-repeat="researcher in researchers" ng-cloak>
       <div class="card-header" id="heading-{{researcher.ORCID}}">
@@ -261,7 +262,9 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
-          There already exists a researcher with this ORCID
+          The server returned the following error: {{errorReturned.status}}, {{errorReturned.statusText}}.
+          <br>
+          {{errorReturned.data}}.
         </div>
         <div class="justify-content-center modal-footer">
           <button type="button" class="btn btn-danger mx-1" data-dismiss="modal">Close</button>
