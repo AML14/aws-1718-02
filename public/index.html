@@ -6,6 +6,7 @@
 	</title>
   <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
   <link rel="stylesheet" href="/open-iconic/font/css/open-iconic-bootstrap.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
   <script type="text/javascript" src="/bower_components/popper.js/dist/umd/popper.min.js"></script>
   <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -21,14 +22,7 @@
     <h1 class="display-4">Researchers</h1>
     <p class="p-condensed lead">A microservice to manage researcher resources. You can see currently active researchers, add new ones, modify or delete them. Just about anything.</p>
     <input type="text" class="form-control mt-3 narrow" placeholder="Enter your apikey here" ng-model="apikey">
-    <div class="top-right-buttons">
-      <div class="row justify-content-end">
-        <button type="button" class="btn btn-link text-primary" data-toggle="modal" data-target="#addResearcherModal">+ Add researcher</button>
-      </div>
-      <div class="row justify-content-end">
-        <button type="button" class="btn btn-link text-danger" data-toggle="modal" data-target="#deleteResearchersModal">Delete all researchers</button>
-      </div>
-    </div>
+   
   </div>
 
   <form name="getResearcherForm">
@@ -36,13 +30,17 @@
       <div class="col-3 input-group">
         <input type="text" name="currentOrcid" class="form-control" placeholder="Researcher's ORCID" aria-label="Researcher's ORCID" ng-model="currentOrcid" ng-class="{'is-invalid': !getResearcherForm.currentOrcid.$valid}" ng-pattern="/^[0-9]{4}-[0-9]{4}-[0-9]{4}-[0-9]{4}$/" required>
         <div class="input-group-append">
-          <button ng-disabled="!getResearcherForm.currentOrcid.$valid" class="btn btn-outline-secondary" type="button" ng-click="getResearcher(); currentOrcid = ''; hideEditFields();">Send</button>
+          <button ng-disabled="!getResearcherForm.currentOrcid.$valid" class="btn btn-outline-secondary" type="button" ng-click="getResearcher(); currentOrcid = ''; hideEditFields();">
+          <i class="fa fa-search"></i></button>
         </div>
       </div>
-      <button class="col-3 btn btn-outline-secondary" type="button" ng-click="getResearchers(); hideEditFields();">Show all researchers</button>
+      <button class="col-3 btn btn-outline-secondary" type="button" ng-click="getResearchers(); hideEditFields();"> <i class="fa fa-eye"></i> Show all researchers</button> &nbsp;&nbsp;
+      <button type="button" class="btn btn-info   " data-toggle="modal" data-target="#addResearcherModal"><i class="fa fa-plus"></i> </button> &nbsp;&nbsp;
+      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteResearchersModal"> <i class="fa fa-trash"></i>  Delete all researchers </button>
     </div>
   </form>
-  <p class="text-center container mt-5" ng-show="!researchers">Look for a specific researcher or get all of them by using the buttons above. Don't forget to attach your apikey!</p>
+  <p class="text-center container mt-5" ng-show="!researchers">Look for a specific researcher or get all of them by using the buttons above.You also can add a new researcher or delete all.
+  <br>Don't forget to attach your apikey!</p>
   <div class="container" id="accordion">
     <div class="card" ng-repeat="researcher in researchers" ng-cloak>
       <div class="card-header" id="heading-{{researcher.ORCID}}">
@@ -132,8 +130,8 @@
               <input type="text" class="form-control" aria-label="University" aria-describedby="inputGroup-university" ng-model="researcher.university">
             </div>
             <div class="row align-self-end justify-content-center">
-              <button type="button" class="btn btn-danger mx-1" ng-click="toggleEditFields()">Cancel</button>
-              <button ng-disabled="!modifyResearcherForm.name.$valid || !modifyResearcherForm.mail.$valid || !modifyResearcherForm.researchGroupName.$valid" type="button" class="btn btn-success mx-1" ng-click="modifyResearcher(researcher.ORCID); hideEditFields();">Update</button>
+              <button type="button" class="btn btn-danger mx-1" ng-click="toggleEditFields()"> <i class="fa fa-times"> </i>  Cancel</button>
+              <button ng-disabled="!modifyResearcherForm.name.$valid || !modifyResearcherForm.mail.$valid || !modifyResearcherForm.researchGroupName.$valid" type="button"  class="btn btn-info mx-1" ng-click="modifyResearcher(researcher.ORCID); hideEditFields();"> <i class ="fa fa-refresh"></i>  Update</button>
             </div>
             </form>
           </div>
@@ -145,8 +143,8 @@
             <p><b>Department:</b> {{copyResearchers[$index].department}}</p>
             <p><b>University:</b> {{copyResearchers[$index].university}}</p>
             <div class="row align-self-end justify-content-center">
-              <button type="button" class="btn btn-secondary mx-1" ng-click="toggleEditFields()">Edit</button>
-              <button type="button" class="btn btn-danger mx-1" ng-click="deleteResearcher(researcher.ORCID)">Delete</button>
+              <button type="button" class="btn btn-info mx-1" ng-click="toggleEditFields()"><i class="fa fa-edit"></i>  Edit</button>
+              <button type="button" class="btn btn-danger mx-1" ng-click="deleteResearcher(researcher.ORCID)"> <i class="fa fa-trash"></i>  Delete</button>
             </div>
           </div>
         </div>
@@ -227,8 +225,9 @@
           </form>
         </div>
         <div class="justify-content-center modal-footer">
-          <button type="button" class="btn btn-danger mx-1" data-dismiss="modal" ng-click="newResearcher = null">Cancel</button>
-          <button ng-disabled="!addResearcherForm.name.$valid || !addResearcherForm.mail.$valid || !addResearcherForm.researchGroupName.$valid || !addResearcherForm.orcid.$valid" type="button" class="btn btn-success mx-1" data-dismiss="modal" ng-click="addResearcher(); closeAddResearcherModal(); newResearcher = null">Add researcher</button>
+          <button type="button" class="btn btn-danger mx-1" data-dismiss="modal" ng-click="newResearcher = null">   <i class="fa fa-times-circle-o "></i> Cancel</button>
+          <button ng-disabled="!addResearcherForm.name.$valid || !addResearcherForm.mail.$valid || !addResearcherForm.researchGroupName.$valid || !addResearcherForm.orcid.$valid" type="button" class="btn btn-info mx-1" data-dismiss="modal" ng-click="addResearcher(); closeAddResearcherModal(); newResearcher = null">
+            <i class="fa fa-save"></i>  Add researcher</button>
         </div>
       </div>
     </div>
@@ -277,9 +276,9 @@
       <div class="container">
       </div>
     </footer>
-  <footer class="footer">
-    <div class="container">
-      <a class="text-muted" href="api/v1/researchers/help" target="_blank">Postman documentation</span>
+  <footer class="footer footerBlack" >
+    <div class="container">=
+      <a class="text-muted"href="api/v1/help" target="_blank"><i class= "fa fa-file"></i>  Postman documentation</span>
     </div>
   </footer>
 </body>

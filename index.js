@@ -16,9 +16,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 
 // Postman documentation
-app.get(baseAPI + "/researchers/help", (req, res) => {
+app.get(baseAPI + "/help", (req, res) => {
 	console.log("GET Postman documentation");
-	res.redirect('https://documenter.getpostman.com/view/3947164/aws1718-02/RVncfHHP');
+	res.redirect('https://documenter.getpostman.com/view/3947164/collection/RVtvqCky');
 });
 
 // Authentication middleware
@@ -124,6 +124,7 @@ app.delete(baseAPI + "/researchers/:orcid", (req, res) => {
 		}
 	});
 });
+
 
 
 app.listen(port, () => {
