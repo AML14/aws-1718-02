@@ -11,4 +11,44 @@
   },
   "department": "LSI",
   "university": "US"
+} {
+  "name": "Manuel Resinas",
+  "phone": "954556234",
+  "mail": "mresinas@us.es",
+  "ORCID": "0000-0003-1575-406X",
+  "researcherID": " B-3063-2008",
+  "website": "https://www.mresinas.us.es",
+  "researchGroup": {
+    "name": "ISA",
+    "website": "http://www.isa.us.es"
+  },
+  "department": "LSI",
+  "university": "US"
+} {
+  "name": "Rafael Corchuelo",
+  "phone": "95 455 27 70"
+  "mail": "corchu@us.es",
+  "ORCID": "0000-0003-1563-6979",
+  "researcherID": " G-3149-2016",
+  "website": "https://www.corchu.us.es",
+  "researchGroup": {
+    "name": "ISA",
+    "website": "http://www.isa.us.es"
+  },
+  "department": "LSI",
+  "university": "US"
 }
+{
+                "name": "Alejandro Fernández",
+                "phone": "951235644",
+                "mail": "afernandez@us.es",
+                "ORCID": "0000-0002-2998-4950",
+                "researcherID": "  E-6988-2010",
+                "website": "https://www.researchgate.net/profile/Alejandro_Fernandez-Montes",
+                "researchGroup": {
+                    "name": "ISA",
+                    "website": "http://www.isa.us.es"
+                },
+                "department": "LSI",
+                "university": "US"
+            
