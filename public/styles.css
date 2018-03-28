@@ -20,15 +20,9 @@ input[disabled] {
   width: 65%;
 }
 
-.top-right-buttons {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-}
-
-.top-right-buttons > div > button {
-  padding-top: 0;
-  padding-bottom: 0;
+.row-no-margin {
+  margin-right: 0;
+  margin-left: 0;
 }
 
 .footer {
@@ -53,17 +47,4 @@ input[disabled] {
   line-height: 60px;
   text-align: left;
   background-color: #dddddd;
-}
-.footerBlack{
-   background-color: #242323;
-}
-.blackButton{
-   background-color: #6C757D;
-   border-radius: 50%;
-    text-align: center;
-    border: none;
-    color: white;
-}.center {
-  text-align: center;
-
 }
