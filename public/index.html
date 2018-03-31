@@ -11,8 +11,9 @@
   <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
   <script type="text/javascript" src="/bower_components/lodash/lodash.js"></script>
-	<script type="text/javascript" src="researchers-app.js"></script>
-	<script type="text/javascript" src="researchers-ctrl.js"></script>
+	<script type="text/javascript" src="/app/researchers-app.js"></script>
+  <script type="text/javascript" src="/app/researchers-ctrl.js"></script>
+  <script type="text/javascript" src="/app/researchers-srvc.js"></script>
 	<link rel="stylesheet" href="styles.css" type="text/css" />
 </head>
 
@@ -20,7 +21,7 @@
 	<div class="jumbotron">
     <h1 class="display-4">Researchers</h1>
     <p class="p-condensed lead">A microservice to manage researcher resources. You can see currently active researchers, add new ones, modify or delete them. Just about anything.</p>
-    <input type="text" class="form-control mt-3 narrow" placeholder="Enter your apikey here" ng-model="apikey">
+    <input type="text" class="form-control mt-3 narrow" placeholder="Enter your apikey here" ng-model="$root.apikey">
   </div>
 
   <form name="getResearcherForm">
@@ -34,7 +35,7 @@
       </div> &nbsp;&nbsp;
       <button class="narrow btn btn-outline-secondary mb-2" type="button" ng-click="getResearchers(); hideEditFields();"><i class="fa fa-eye"></i> Show all researchers</button> &nbsp;&nbsp;
       <button class="narrow btn btn-info mb-2" type="button" data-toggle="modal" data-target="#addResearcherModal"><i class="fa fa-plus"></i> Add researcher</button> &nbsp;&nbsp;
-      <button class="narrow btn btn-danger mb-2" type="button"data-toggle="modal" data-target="#deleteResearchersModal"> <i class="fa fa-trash"></i> Delete all researchers </button>
+      <button class="narrow btn btn-danger mb-2" type="button" data-toggle="modal" data-target="#deleteResearchersModal"> <i class="fa fa-trash"></i> Delete all researchers </button>
     </div>
   </form>
   <p class="text-center container mt-4" ng-show="!researchers">Look for a specific researcher or get all of them by using the buttons above. You can also add a new researcher or delete them all.

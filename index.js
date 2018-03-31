@@ -23,7 +23,7 @@ app.get(baseAPI + "/help", (req, res) => {
 
 // Authentication middleware
 app.use((req, res, next) => {
-	const apikey = req.query.apikey;
+	const apikey = req.query.apikey || req.headers.apikey;
 	if (!apikey) {
 		res.status(401).send('Apikey required');
 	} else if (apikey != config.apikey) {

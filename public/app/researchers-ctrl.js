@@ -1,10 +1,9 @@
 angular
 	.module("ResearchersApp")
-	.controller("ResearchersCtrl", function ($scope, $http) {
-		console.log("Controller initialized");
+	.controller("ResearchersCtrl", function ($scope, $rootScope, $http) {
 
 		function refresh() {
-			$http.get("api/v1/researchers?apikey="+$scope.apikey)
+			$http.get("api/v1/researchers")
 				.then(function (response) {
 					$scope.researchers = response.data;
 					$scope.copyResearchers = angular.copy($scope.researchers);
@@ -19,7 +18,7 @@ angular
 		// API functions
 
 		$scope.getResearchers = function () {
-			$http.get("api/v1/researchers?apikey="+$scope.apikey)
+			$http.get("api/v1/researchers")
 				.then(function (response) {
 					$scope.researchers = response.data;
 					$scope.copyResearchers = angular.copy($scope.researchers);
@@ -32,7 +31,7 @@ angular
 		}
 
 		$scope.getResearcher = function () {
-			$http.get("api/v1/researchers/"+$scope.currentOrcid+"?apikey="+$scope.apikey)
+			$http.get("api/v1/researchers/"+$scope.currentOrcid)
 				.then(function (response) {
 					$scope.researchers = [];
 					$scope.researchers[0] = response.data;
@@ -47,7 +46,7 @@ angular
 
 		$scope.addResearcher = function () {
 			$http
-				.post("/api/v1/researchers?apikey="+$scope.apikey, $scope.newResearcher)
+				.post("/api/v1/researchers", $scope.newResearcher)
 				.then(function () {
 					refresh();
 				})
@@ -62,7 +61,7 @@ angular
 			var researcher = _.find(angular.copy($scope.researchers), {'ORCID': orcid});
 			delete researcher.ORCID;
 			$http
-				.put("/api/v1/researchers/"+orcid+"?apikey="+$scope.apikey, researcher)
+				.put("/api/v1/researchers/"+orcid, researcher)
 				.then(function () {
 					refresh();
 				})
@@ -76,7 +75,7 @@ angular
 		$scope.deleteResearcher = function (orcid) {
 			var researcher = _.find($scope.researchers, {'ORCID': orcid});
 			$http
-				.delete("/api/v1/researchers/"+orcid+"?apikey="+$scope.apikey)
+				.delete("/api/v1/researchers/"+orcid)
 				.then(function () {
 					refresh();
 				})
@@ -89,7 +88,7 @@ angular
 
 		$scope.deleteAllResearchers = function () {
 			$http
-				.delete("/api/v1/researchers?apikey="+$scope.apikey)
+				.delete("/api/v1/researchers")
 				.then(function () {
 					refresh();
 				})
@@ -103,7 +102,7 @@ angular
 		// Auxiliary variables and functions to control UI
 
 		$scope.showEditFields = false;
-		$scope.apikey = '';
+		$rootScope.apikey = '';
 		$scope.toggleEditFields = function () {
 			$scope.showEditFields = !$scope.showEditFields;
 		};
