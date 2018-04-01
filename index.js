@@ -37,6 +37,9 @@ app.use((req, res, next) => {
 app.get(baseAPI + "/researchers", (req, res) => {
 	console.log("GET /researchers");
 	researchers.allResearchers((err, resResearchers) => {
+		if (err) {
+			return res.sendStatus(500);
+		}
 		res.send(resResearchers.map(researcher => {
 			delete researcher._id;
 			return researcher;
@@ -48,6 +51,9 @@ app.post(baseAPI + "/researchers", (req, res) => {
 	console.log("POST /researchers");
 	var researcher = req.body;
 	researchers.get(researcher.ORCID, (err, resResearchers) => {
+		if (err) {
+			return res.sendStatus(500);
+		}
 		if (resResearchers.length === 0) {
 			researchers.add(researcher);
 			res.sendStatus(201);
@@ -66,6 +72,9 @@ app.put(baseAPI + "/researchers", (req, res) => {
 app.delete(baseAPI + "/researchers", (req, res) => {
 	console.log("DELETE /researchers");
 	researchers.removeAll((err, numRemoved) => {
+		if (err) {
+			return res.sendStatus(500);
+		}
 		console.log("researchers removed:" + numRemoved);
 		res.sendStatus(200);
 	});
@@ -75,6 +84,9 @@ app.get(baseAPI + "/researchers/:orcid", (req, res) => {
 	console.log("GET /researchers/" + req.params.orcid);
 	var orcid = req.params.orcid;
 	researchers.get(orcid, (err, researchers) => {
+		if (err) {
+			return res.sendStatus(500);
+		}
 		if (researchers.length === 0) {
 			res.status(404).send('There\'s no researcher with that ORCID');
 		}
@@ -92,7 +104,6 @@ app.post(baseAPI + "/researchers/:orcid", (req, res) => {
 
 app.put(baseAPI + "/researchers/:orcid", (req, res) => {
 	console.log("PUT /researchers/" + req.params.orcid);
-	console.log(req);
 	var updatedResearcher = req.body;
 	if (updatedResearcher.ORCID) {
 		res.status(400).send('ORCID field cannot be updated');
@@ -101,6 +112,9 @@ app.put(baseAPI + "/researchers/:orcid", (req, res) => {
 		var orcid = req.params.orcid;
 		updatedResearcher.ORCID = orcid;
 		researchers.update(orcid, updatedResearcher, (err, numUpdates) => {
+			if (err) {
+				return res.sendStatus(500);
+			}
 			console.log("researchers updated:" + numUpdates);
 			if (numUpdates === 0) {
 				res.sendStatus(404);
@@ -116,6 +130,9 @@ app.delete(baseAPI + "/researchers/:orcid", (req, res) => {
 	console.log("DELETE /researchers/" + req.params.orcid);
 	var orcid = req.params.orcid;
 	researchers.remove(orcid, (err, numRemoved) => {
+		if (err) {
+			return res.sendStatus(500);
+		}
 		console.log("researchers removed:" + numRemoved);
 		if (numRemoved != 0) {
 			res.sendStatus(200);
@@ -124,8 +141,6 @@ app.delete(baseAPI + "/researchers/:orcid", (req, res) => {
 		}
 	});
 });
-
-
 
 app.listen(port, () => {
 	console.log("Server with GUI up and running!!");
