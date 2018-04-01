@@ -18,7 +18,7 @@ app.use(bodyParser.json());
 // Postman documentation
 app.get(baseAPI + "/help", (req, res) => {
 	console.log("GET Postman documentation");
-	res.redirect('https://documenter.getpostman.com/view/3947164/collection/RVtvqCky');
+	res.redirect('https://documenter.getpostman.com/view/3947164/aws-1718-02/RVtvqYmp');
 });
 
 // Authentication middleware
