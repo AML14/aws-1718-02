@@ -67,7 +67,7 @@
       <div id="collapse-{{researcher.ORCID}}" class="collapse" aria-labelledby="heading-{{researcher.ORCID}}" data-parent="#accordion">
         <div class="card-body">
           <div ng-show="showEditFields">
-            <form name="modifyResearcherForm">
+            <form name="modifyResearcherForm" class="mb-0">
             <div class="input-group input-group-sm mb-1">
               <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroup-name">Name</span>
@@ -128,9 +128,9 @@
               </div>
               <input type="text" class="form-control" aria-label="University" aria-describedby="inputGroup-university" ng-model="researcher.university">
             </div>
-            <div class="row align-self-end justify-content-center">
+            <div class="row align-self-end justify-content-center mt-3">
               <button type="button" class="btn btn-danger mx-1" ng-click="toggleEditFields()"><i class="fa fa-times"></i> Cancel</button>
-              <button ng-disabled="!modifyResearcherForm.name.$valid || !modifyResearcherForm.mail.$valid || !modifyResearcherForm.researchGroupName.$valid" type="button"  class="btn btn-info mx-1" ng-click="modifyResearcher(researcher.ORCID); hideEditFields();"> <i class ="fa fa-sync-alt"></i>  Update</button>
+              <button ng-disabled="!modifyResearcherForm.name.$valid || !modifyResearcherForm.mail.$valid || !modifyResearcherForm.researchGroupName.$valid" type="button"  class="btn btn-info mx-1" ng-click="modifyResearcher(researcher.ORCID); hideEditFields();"> <i class ="fa fa-sync-alt"></i> Update</button>
             </div>
             </form>
           </div>
