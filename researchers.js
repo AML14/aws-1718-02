@@ -1,14 +1,5 @@
 'use strict';
 
-var path = require('path');
-var DataStore = require('nedb');
-var dbFileName = path.join(__dirname, 'researchers.json');
-
-// var db = new DataStore({
-// 	filename : dbFileName,
-// 	autoload : true
-// });
-
 var db;
 var col;
 var dbName = 'researchers';
@@ -25,7 +16,6 @@ Researchers.prototype.connectDb = function(callback) {
 		}
 		db = database.db(dbName);
 		col = db.collection(dbName);
-		console.log(db)
 		callback(err, database);
 	});
 };
