@@ -1,3 +1,3 @@
 module.exports = {
-  apikey: 'asdf1234'
+  apikey: process.env.APIKEY || 'asdf1234'
 };
