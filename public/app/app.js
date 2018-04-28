@@ -15,6 +15,10 @@ angular
         templateUrl: "app/views/universities/universities.html",
         controller: "UniversitiesCtrl"
     })
+    .when("/departments", {
+      templateUrl: "app/views/departments/departments.html",
+      controller: "DepartmentsCtrl"
+    })
     .otherwise({
       templateUrl: "app/views/researchers/researchers.html",
       controller: "ResearchersCtrl"

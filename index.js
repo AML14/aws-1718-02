@@ -5,12 +5,18 @@ var bodyParser = require("body-parser");
 var path = require('path');
 var favicon = require('serve-favicon');
 var cors = require("cors");
+var request = require("request").defaults({json: true});
 
 var researchers = require("./researchers.js");
 var config = require('./config');
 
 var port = (process.env.PORT || 15000);
 var baseAPI = "/api/v1";
+
+// External API params
+var baseAPIEA = "/api/v1";
+var snapshotEA = 1804;
+var serverURLEA = "https://researcher.data.sabius-alpha.services.governify.io";
 
 var app = express();
 
@@ -148,6 +154,7 @@ app.delete(baseAPI + "/researchers/:orcid", (req, res) => {
 
 // Universities routes
 app.get(baseAPI + "/universities/:id", (req, res) => {
+	console.log("GET /universities/" + req.params.id);
 	res.send({
 		name: "Universidad Complutense de Madrid",
 		address: "Avda. de Séneca, 2 Ciudad Universitaria",
@@ -168,6 +175,7 @@ app.get(baseAPI + "/universities/:id", (req, res) => {
 
 // Research groups routes
 app.get(baseAPI + "/groups/:id", (req, res) => {
+	console.log("GET /groups/" + req.params.id);
 	res.send({
 		name: "ISA",
 		id: "1",
@@ -182,6 +190,31 @@ app.get(baseAPI + "/groups/:id", (req, res) => {
 		_id: "OeZgEeTAh4BfJD3l"
 		});
 });
+
+// External API (Sabius) routes
+app.get(baseAPI + "/departments", (req, res) => {
+	console.log("GET /departments");
+	request.get(`${serverURLEA}${baseAPIEA}/${snapshotEA}/departments`, (err, resp, body) => {
+		if (err) {
+			console.log('Error: '+err);
+			res.sendStatus(500);
+		} else {
+			res.status(resp.statusCode).send(body);
+		}
+	})
+})
+
+app.get(baseAPI + "/departments/:id", (req, res) => {
+	console.log("GET /departments/" + req.params.id);
+	request.get(`${serverURLEA}${baseAPIEA}/${snapshotEA}/departments/${req.params.id}`, (err, resp, body) => {
+		if (err) {
+			console.log('Error: '+err);
+			res.sendStatus(500);
+		} else {
+			res.status(resp.statusCode).send(body);
+		}
+	})
+})
 
 researchers.connectDb((err) => {
 	if (err) {

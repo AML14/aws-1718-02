@@ -31,7 +31,6 @@ angular
 		}
 
 		// Auxiliary variables
-
 		// $rootScope.apikeyUniversities = '';
 		$scope.universityName = '';
 	});

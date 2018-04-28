@@ -5,6 +5,12 @@
 		Researchers App
 	</title>
   <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css" type="text/css" />
+	<link rel="stylesheet" href="styles.css" type="text/css" />
+</head>
+
+<body>
+  <div ng-view></div>
+
   <script defer src="/static/icons/fontawesome/fontawesome-all.js"></script>
   <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
   <script type="text/javascript" src="/bower_components/popper.js/dist/umd/popper.min.js"></script>
@@ -16,11 +22,7 @@
   <script type="text/javascript" src="/app/services/httpInterceptor.service.js"></script>
   <script type="text/javascript" src="/app/views/researchers/researchers.controller.js"></script>
   <script type="text/javascript" src="/app/views/universities/universities.controller.js"></script>
-	<link rel="stylesheet" href="styles.css" type="text/css" />
-</head>
-
-<body>
-	<div ng-view></div>
+  <script type="text/javascript" src="/app/views/departments/departments.controller.js"></script>
 </body>
 
 </html>

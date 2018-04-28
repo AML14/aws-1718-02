@@ -2,6 +2,12 @@ body {
   margin-bottom: 85px;
 }
 
+@media (max-width: 576px) {
+  .jumbotron {
+    padding-top: 3rem;
+  }
+}
+
 img.expand-arrow {
   height: 12px;
   cursor: pointer;
@@ -22,14 +28,19 @@ input[disabled] {
 
 .top-right-buttons {
   position: absolute;
-  top: 12px;
-  right: 24px;
+  top: 6px;
+  right: 20px;
 }
 
 .top-left-buttons {
   position: absolute;
-  top: 12px;
-  left: 24px;
+  top: 6px;
+  left: 20px;
+}
+
+.top-right-buttons > div > a, .top-left-buttons > div > a {
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 .list-group-item.rg {
