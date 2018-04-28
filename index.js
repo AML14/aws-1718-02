@@ -4,8 +4,9 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var path = require('path');
 var favicon = require('serve-favicon');
-var researchers = require("./researchers.js");
+var cors = require("cors");
 
+var researchers = require("./researchers.js");
 var config = require('./config');
 
 var port = (process.env.PORT || 15000);
@@ -16,6 +17,7 @@ var app = express();
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, '/public/favicon.ico')));
 app.use(bodyParser.json());
+app.use(cors());
 
 // Postman documentation
 app.get(baseAPI + "/help", (req, res) => {
@@ -24,7 +26,7 @@ app.get(baseAPI + "/help", (req, res) => {
 });
 
 // Authentication middleware
-app.use(`${baseAPI}\*`,(req, res, next) => {
+app.use(`${baseAPI}/researchers\*`,(req, res, next) => {
 	const apikey = req.query.apikey || req.headers.apikey;
 	if (!apikey) {
 		res.status(401).send('Apikey required');
@@ -143,6 +145,43 @@ app.delete(baseAPI + "/researchers/:orcid", (req, res) => {
 		}
 	});
 });
+
+// Universities routes
+app.get(baseAPI + "/universities/:id", (req, res) => {
+	res.send({
+		name: "Universidad Complutense de Madrid",
+		address: "Avda. de Séneca, 2 Ciudad Universitaria",
+		city: "Madrid",
+		ZipCode: 28040,
+		phone: 923294500,
+		fax: 914520400,
+		mail: "infocom@ucm.es",
+		web: "https://www.ucm.es/",
+		researchGroups: [
+			"ISA",
+			"TDG",
+			"Grupo de Computación Natural",
+			"Ciencia de los Materiales"
+		]
+	})
+})
+
+// Research groups routes
+app.get(baseAPI + "/groups/:id", (req, res) => {
+	res.send({
+		name: "ISA",
+		id: "1",
+		responsable: "Antonio Ruiz",
+		email: "isagroup.us@gmail.com",
+		components: [
+			"Pablo Fernández",
+			"Antonio Ruiz",
+			"Manolo Resinas"
+		],
+		lineresearch: "REST APIs",
+		_id: "OeZgEeTAh4BfJD3l"
+		})
+})
 
 researchers.connectDb((err) => {
 	if (err) {

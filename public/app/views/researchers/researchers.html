@@ -1,7 +1,12 @@
 <div class="jumbotron">
   <h1 class="display-4">Researchers</h1>
   <p class="p-condensed lead">A microservice to manage researcher resources. You can see currently active researchers, add new ones, modify or delete them. Just about anything.</p>
-  <input type="text" class="form-control mt-3 narrow" placeholder="Enter your apikey here" ng-model="$root.apikey">
+  <input type="text" class="form-control mt-3 narrow" placeholder="Enter your apikey here" ng-model="$root.apikeyResearchers">
+  <div class="top-right-buttons">
+    <div class="row justify-content-end">
+      <a class="btn btn-link text-primary" href="#!/universities">Looking for a university?</a>
+    </div>
+  </div>
 </div>
 
 <form name="getResearcherForm">
@@ -231,7 +236,7 @@
   </div>
 </div>
 
-<!-- Error creating researcher modal -->
+<!-- Error modal -->
 <div class="modal fade" id="errorResearchersModal">
   <div class="modal-dialog">
     <div class="modal-content">

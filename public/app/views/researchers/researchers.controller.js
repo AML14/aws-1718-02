@@ -102,7 +102,7 @@ angular
 		// Auxiliary variables and functions to control UI
 
 		$scope.showEditFields = false;
-		$rootScope.apikey = '';
+		$rootScope.apikeyResearchers = '';
 		$scope.toggleEditFields = function () {
 			$scope.showEditFields = !$scope.showEditFields;
 		};

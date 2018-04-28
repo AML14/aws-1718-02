@@ -20,9 +20,30 @@ input[disabled] {
   width: 65%;
 }
 
+.top-right-buttons {
+  position: absolute;
+  top: 12px;
+  right: 24px;
+}
+
+.top-left-buttons {
+  position: absolute;
+  top: 12px;
+  left: 24px;
+}
+
+.list-group-item.rg {
+  padding-left: 4em;
+}
+
 .row-no-margin {
   margin-right: 0;
   margin-left: 0;
+}
+
+.no-padding {
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .footer {
