@@ -3,6 +3,7 @@
 var express = require("express");
 var bodyParser = require("body-parser");
 var path = require('path');
+var favicon = require('serve-favicon');
 var researchers = require("./researchers.js");
 
 var config = require('./config');
@@ -13,6 +14,7 @@ var baseAPI = "/api/v1";
 var app = express();
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(favicon(path.join(__dirname, '/public/favicon.ico')));
 app.use(bodyParser.json());
 
 // Postman documentation
@@ -22,7 +24,7 @@ app.get(baseAPI + "/help", (req, res) => {
 });
 
 // Authentication middleware
-app.use((req, res, next) => {
+app.use(`${baseAPI}\*`,(req, res, next) => {
 	const apikey = req.query.apikey || req.headers.apikey;
 	if (!apikey) {
 		res.status(401).send('Apikey required');
