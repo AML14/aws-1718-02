@@ -163,8 +163,8 @@ app.get(baseAPI + "/universities/:id", (req, res) => {
 			"Grupo de Computación Natural",
 			"Ciencia de los Materiales"
 		]
-	})
-})
+	});
+});
 
 // Research groups routes
 app.get(baseAPI + "/groups/:id", (req, res) => {
@@ -180,8 +180,8 @@ app.get(baseAPI + "/groups/:id", (req, res) => {
 		],
 		lineresearch: "REST APIs",
 		_id: "OeZgEeTAh4BfJD3l"
-		})
-})
+		});
+});
 
 researchers.connectDb((err) => {
 	if (err) {
