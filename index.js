@@ -201,8 +201,8 @@ app.get(baseAPI + "/departments", (req, res) => {
 		} else {
 			res.status(resp.statusCode).send(body);
 		}
-	})
-})
+	});
+});
 
 app.get(baseAPI + "/departments/:id", (req, res) => {
 	console.log("GET /departments/" + req.params.id);
@@ -213,8 +213,8 @@ app.get(baseAPI + "/departments/:id", (req, res) => {
 		} else {
 			res.status(resp.statusCode).send(body);
 		}
-	})
-})
+	});
+});
 
 researchers.connectDb((err) => {
 	if (err) {
