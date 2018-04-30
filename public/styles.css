@@ -65,7 +65,11 @@ input[disabled] {
 
 .delete-project-button {
   margin-left: 1rem;
-  margin-right: 0.5rem;
+  margin-right: 1rem;
+  color: #dc3545;
+}
+
+.delete-project-button:hover {
   color: #dc3545;
 }
 

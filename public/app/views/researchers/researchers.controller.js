@@ -101,11 +101,29 @@ angular
 
 		// Auxiliary variables and functions to control UI
 
-		$scope.showEditFields = false;
 		$rootScope.apikeyResearchers = '';
+
 		$scope.selectResearcher = function(researcher) {
 			$scope.selectedResearcher = researcher;
 		}
+		$scope.deleteProject = function(projectIndex, isNewResearcher) {
+			if (!isNewResearcher) {
+				var researcherIndex = _.findIndex($scope.researchers, { 'ORCID': $scope.selectedResearcher.ORCID });
+				$scope.researchers[researcherIndex].projects.splice(projectIndex, 1);
+			} else {
+				$scope.newResearcher.projects.splice(projectIndex, 1);
+			}
+		}
+		$scope.addProject = function (isNewResearcher) {
+			if (!isNewResearcher) {
+				var researcherIndex = _.findIndex($scope.researchers, {'ORCID': $scope.selectedResearcher.ORCID});
+				$scope.researchers[researcherIndex].projects.push('');
+			} else {
+				$scope.newResearcher.projects.push('');
+			}
+		}
+
+		$scope.showEditFields = false;
 		$scope.toggleEditFields = function () {
 			$scope.showEditFields = !$scope.showEditFields;
 		};
