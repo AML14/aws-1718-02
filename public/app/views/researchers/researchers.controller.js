@@ -103,6 +103,9 @@ angular
 
 		$scope.showEditFields = false;
 		$rootScope.apikeyResearchers = '';
+		$scope.selectResearcher = function(researcher) {
+			$scope.selectedResearcher = researcher;
+		}
 		$scope.toggleEditFields = function () {
 			$scope.showEditFields = !$scope.showEditFields;
 		};

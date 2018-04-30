@@ -33,7 +33,7 @@
     <div class="card-header" id="heading-{{researcher.ORCID}}">
       <div class="row justify-content-between">
         <h5 class="col-12 col-md-4 mb-0">
-          <button class="btn btn-link" data-toggle="collapse" data-target="#collapse-{{researcher.ORCID}}" aria-expanded="false" aria-controls="collapse-{{researcher.ORCID}}">
+          <button class="btn btn-link" ng-click="selectResearcher(researcher);" data-toggle="collapse" data-target="#collapse-{{researcher.ORCID}}" aria-expanded="false" aria-controls="collapse-{{researcher.ORCID}}">
             {{copyResearchers[$index].name}}
           </button>
         </h5>
@@ -48,7 +48,7 @@
               {{copyResearchers[$index].researchGroup.name}}
             </a>
           </h5>
-          <img class="expand-arrow align-self-center" src="./static/img/arrow-down-128.png" data-toggle="collapse" data-target="#collapse-{{researcher.ORCID}}" aria-expanded="false" aria-controls="collapse-{{researcher.ORCID}}"/>
+          <img class="expand-arrow align-self-center" ng-click="selectResearcher(researcher);" src="./static/img/arrow-down-128.png" data-toggle="collapse" data-target="#collapse-{{researcher.ORCID}}" aria-expanded="false" aria-controls="collapse-{{researcher.ORCID}}"/>
         </div>
       </div>
     </div>
@@ -116,6 +116,17 @@
             </div>
             <input type="text" class="form-control" aria-label="University" aria-describedby="inputGroup-university" ng-model="researcher.university">
           </div>
+          <div ng-repeat="project in researcher.projects">
+            <div class="row row-no-margin">
+              <div class="input-group input-group-sm mb-1 col no-padding">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-university">Project {{$index+1}}</span>
+                </div>
+                <input type="text" class="form-control" aria-label="University" aria-describedby="inputGroup-university" ng-model="project">
+              </div>
+              <i class="fa fa-times align-self-center delete-project-button"></i>
+            </div>
+          </div>
           <div class="row align-self-end justify-content-center mt-3">
             <button type="button" class="btn btn-danger mx-1" ng-click="toggleEditFields()"><i class="fa fa-times"></i> Cancel</button>
             <button ng-disabled="!modifyResearcherForm.name.$valid || !modifyResearcherForm.mail.$valid || !modifyResearcherForm.researchGroupName.$valid" type="button"  class="btn btn-info mx-1" ng-click="modifyResearcher(researcher.ORCID); hideEditFields();"> <i class ="fa fa-sync-alt"></i> Update</button>
@@ -129,6 +140,7 @@
           <p><b>ResearcherID:</b> {{copyResearchers[$index].researcherID}}</p>
           <p><b>Department:</b> {{copyResearchers[$index].department}}</p>
           <p><b>University:</b> {{copyResearchers[$index].university}}</p>
+          <button class="btn btn-link projects-button" type="button" data-toggle="modal" data-target="#seeProjectsModal"><b>See projects</b></button>
           <div class="row align-self-end justify-content-center">
             <button type="button" class="btn btn-info mx-1" ng-click="toggleEditFields()"><i class="fa fa-edit"></i> Edit</button>
             <button type="button" class="btn btn-danger mx-1" ng-click="deleteResearcher(researcher.ORCID)"> <i class="fa fa-trash"></i> Delete</button>
@@ -238,6 +250,26 @@
     </div>
   </div>
 </div>
+
+<!-- See projects modal -->
+<div class="modal fade" id="seeProjectsModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Projects of {{selectedResearcher.name}}</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div ng-repeat="project in selectedResearcher.projects">
+            <p>{{project}}</p>
+          </div>
+        </div>
+        <div class="justify-content-center modal-footer">
+          <button type="button" class="btn btn-danger mx-1" data-dismiss="modal"><i class="fa fa-times"></i> Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 <!-- Error modal -->
 <div class="modal fade" id="errorResearchersModal">

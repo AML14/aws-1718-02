@@ -6,6 +6,8 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var cors = require("cors");
 var request = require("request").defaults({json: true});
+var passport = require("passport");
+var GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 var researchers = require("./researchers.js");
 var config = require('./config');
@@ -31,7 +33,7 @@ app.get(baseAPI + "/help", (req, res) => {
 	res.redirect('https://documenter.getpostman.com/view/3947164/aws-1718-02/RVtvqYmp');
 });
 
-// Authentication middleware
+// Apikey authentication middleware
 app.use(`${baseAPI}/researchers\*`,(req, res, next) => {
 	const apikey = req.query.apikey || req.headers.apikey;
 	if (!apikey) {
@@ -42,6 +44,28 @@ app.use(`${baseAPI}/researchers\*`,(req, res, next) => {
 		next();
 	}
 });
+
+// OAuth authentication middleware
+// passport.use(
+// 	new GoogleStrategy({
+// 		clientID: config.passportGoogle.GOOGLE_CLIENT_ID,
+// 		clientSecret: config.passportGoogle.GOOGLE_CLIENT_SECRET,
+// 		callbackURL: config.passportGoogle.callbackURL
+// 	},
+// 	function(accessToken, refreshToken, profile, cb) {
+// 		return cb(err, user);
+// 		console.log("hola");
+// 	})
+// );
+
+// app.use(passport.initialize());
+
+// // Redirect route
+// app.get('/redirect', (req, res) => {
+// 	res.send('Hello');
+// })
+
+// app.get('/preredirect', passport.authenticate('google', { scope: ['profile'] }));
 
 // API routes
 app.get(baseAPI + "/researchers", (req, res) => {

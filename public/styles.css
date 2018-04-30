@@ -57,6 +57,18 @@ input[disabled] {
   padding-right: 0;
 }
 
+.projects-button {
+  padding: 0;
+  border: 0;
+  margin-bottom: 1rem;
+}
+
+.delete-project-button {
+  margin-left: 1rem;
+  margin-right: 0.5rem;
+  color: #dc3545;
+}
+
 .footer {
   position: fixed;
   z-index: 3;
