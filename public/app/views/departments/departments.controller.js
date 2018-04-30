@@ -1,6 +1,10 @@
 angular
 	.module("ResearchersApp")
-	.controller("DepartmentsCtrl", function ($scope, $rootScope, $http, $compile) {
+	.controller("DepartmentsCtrl", DepartmentsController);
+	
+	UniversitiesController.$inject = ["$scope", "$rootScope", "$http", "$compile"];
+	
+	function DepartmentsController($scope, $rootScope, $http, $compile) {
 
 		// API functions
 
@@ -20,7 +24,6 @@ angular
 		$scope.getDepartments = function () {
 			$http.get("api/v1/departments")
 				.then(function (response) {
-					// debugger
 					$scope.departments = response.data.map(department => {
 						return department.groupName;
 					})
@@ -41,4 +44,4 @@ angular
 
 		// Get departments on controller start, so as to show them while searching in the input box
 		$scope.getDepartments();
-	});
+	};

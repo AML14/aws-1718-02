@@ -1,6 +1,10 @@
 angular
 	.module("ResearchersApp")
-	.controller("UniversitiesCtrl", function ($scope, $rootScope, $http) {
+	.controller("UniversitiesCtrl", UniversitiesController);
+	
+	UniversitiesController.$inject = ["$scope", "$rootScope", "$http"];
+
+	function UniversitiesController($scope, $rootScope, $http) {
 
 		// API functions
 
@@ -33,4 +37,4 @@ angular
 		// Auxiliary variables
 		// $rootScope.apikeyUniversities = '';
 		$scope.universityName = '';
-	});
+	};

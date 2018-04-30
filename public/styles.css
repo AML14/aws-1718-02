@@ -73,6 +73,11 @@ input[disabled] {
   color: #dc3545;
 }
 
+svg {
+  display: block;
+  margin: auto;
+}
+
 .footer {
   position: fixed;
   z-index: 3;

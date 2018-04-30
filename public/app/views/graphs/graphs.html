@@ -1,0 +1,48 @@
+<div class="container">
+  <h1 class="display-4 text-center mt-5">Graphs</h1>
+  <p class="lead text-center">Get some info about researchers in a more visual and attractive way.</p>
+
+  <div class="top-left-buttons">
+    <div class="row justify-content-start">
+      <a class="btn btn-link text-primary" href="#!/researchers">&lt; Go back to researchers</a>
+    </div>
+  </div>
+
+  <ul class="nav nav-tabs" id="graphsTab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link {{selectedTab === 'projects' ? 'active' : null}}"
+          ng-click="selectTab('projects')" id="projects-tab" data-toggle="tab" href=""
+          role="tab" aria-controls="projectsTabContent" aria-selected="{{selectedTab === 'projects'}}">
+        Projects
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {{selectedTab === 'universities' ? 'active' : null}}" 
+          ng-click="selectTab('universities')" id="universities-tab" data-toggle="tab" href=""
+          role="tab" aria-controls="universitiesTabContent" aria-selected="{{selectedTab === 'universities'}}">
+        Universities
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {{selectedTab === 'departments' ? 'active' : null}}"
+          ng-click="selectTab('departments')" id="departments-tab" data-toggle="tab" href=""
+          role="tab" aria-controls="departmentsTabContent" aria-selected="{{selectedTab === 'departments'}}">
+        Departments
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link {{selectedTab === 'groups' ? 'active' : null}}"
+          ng-click="selectTab('groups')" id="groups-tab" data-toggle="tab" href=""
+          role="tab" aria-controls="groupsTabContent" aria-selected="{{selectedTab === 'groups'}}">
+        Groups
+      </a>
+    </li>
+  </ul>
+  <div class="tab-content" id="graphsTabContent">
+    <div class="mt-3 mb-3 tab-pane fade {{selectedTab === 'projects' ? 'show active' : null}}" id="projectsTabContent" role="tabpanel" aria-labelledby="projects-tab">Number of projects per researcher.</div>
+    <div class="mt-3 mb-3 tab-pane fade {{selectedTab === 'universities' ? 'show active' : null}}" id="universitiesTabContent" role="tabpanel" aria-labelledby="universities-tab">Number of researchers per university.</div>
+    <div class="mt-3 mb-3 tab-pane fade {{selectedTab === 'departments' ? 'show active' : null}}" id="departmentsTabContent" role="tabpanel" aria-labelledby="departments-tab">Number of researchers per department.</div>
+    <div class="mt-3 mb-3 tab-pane fade {{selectedTab === 'groups' ? 'show active' : null}}" id="groupsTabContent" role="tabpanel" aria-labelledby="groups-tab">Number of researchers per research group.</div>
+  </div>
+
+</div>

@@ -1,6 +1,12 @@
 angular
 	.module("ResearchersApp")
-	.controller("ResearchersCtrl", function ($scope, $rootScope, $http) {
+	.controller("ResearchersCtrl", ResearchersController);
+
+	ResearchersController.$inject = ["$scope", "$rootScope", "$http", "researchersDataService"];
+	
+	function ResearchersController($scope, $rootScope, $http, researchersDataService) {
+
+		$scope.researchersDataService = researchersDataService;
 
 		function refresh() {
 			$http.get("api/v1/researchers")
@@ -100,8 +106,9 @@ angular
 		}
 
 		// Auxiliary variables and functions to control UI
-
-		$rootScope.apikeyResearchers = '';
+		if (!$rootScope.apikeyResearchers) {
+			$rootScope.apikeyResearchers = '';
+		}
 
 		$scope.selectResearcher = function(researcher) {
 			$scope.selectedResearcher = researcher;
@@ -135,4 +142,4 @@ angular
 			$('#addResearcherModal').modal('hide');
 		}
 
-	});
+	};

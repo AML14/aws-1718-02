@@ -156,6 +156,10 @@
   </div>
 </div>
 
+<div class="text-center mt-3" ng-show="researchers.length > 1">
+  <a class="narrow btn btn-success" ng-click="researchersDataService.setResearchersData(researchers)" href="#!/graphs" role="button"> <i class="fa fa-chart-pie"></i> Make it look prettier!</a>
+</div>
+
 <!-- Add researcher modal -->
 <div class="modal fade" id="addResearcherModal">
   <div class="modal-dialog modal-lg">

@@ -6,7 +6,8 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var cors = require("cors");
 var request = require("request").defaults({json: true});
-
+// var passport = require("passport");
+// var GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 var researchers = require("./researchers.js");
 var config = require('./config');
