@@ -124,6 +124,9 @@ angular
 		$scope.addProject = function (isNewResearcher) {
 			if (!isNewResearcher) {
 				var researcherIndex = _.findIndex($scope.researchers, {'ORCID': $scope.selectedResearcher.ORCID});
+				if ($scope.researchers[researcherIndex].projects === undefined) {
+					$scope.researchers[researcherIndex].projects = [];
+				}
 				$scope.researchers[researcherIndex].projects.push('');
 			} else {
 				$scope.newResearcher.projects.push('');
