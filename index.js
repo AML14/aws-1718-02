@@ -20,6 +20,14 @@ var baseAPIEA = "/api/v1";
 var snapshotEA = 1804;
 var serverURLEA = "https://researcher.data.sabius-alpha.services.governify.io";
 
+// Universities API params
+var baseAPIUni = "/api/v1";
+var serverURLUni = "https://aws1718-04.herokuapp.com";
+
+// Research groups API params
+var baseAPIRG = "/api/v1";
+var serverURLRG = "https://aws1718-03.herokuapp.com";
+
 var app = express();
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -179,40 +187,58 @@ app.delete(baseAPI + "/researchers/:orcid", (req, res) => {
 // Universities routes
 app.get(baseAPI + "/universities/:id", (req, res) => {
 	console.log("GET /universities/" + req.params.id);
-	res.send({
-		name: "Universidad Complutense de Madrid",
-		address: "Avda. de Séneca, 2 Ciudad Universitaria",
-		city: "Madrid",
-		ZipCode: 28040,
-		phone: 923294500,
-		fax: 914520400,
-		mail: "infocom@ucm.es",
-		web: "https://www.ucm.es/",
-		researchGroups: [
-			"ISA",
-			"TDG",
-			"Grupo de Computación Natural",
-			"Ciencia de los Materiales"
-		]
+	// res.send({
+	// 	name: "Universidad Complutense de Madrid",
+	// 	address: "Avda. de Séneca, 2 Ciudad Universitaria",
+	// 	city: "Madrid",
+	// 	ZipCode: 28040,
+	// 	phone: 923294500,
+	// 	fax: 914520400,
+	// 	mail: "infocom@ucm.es",
+	// 	web: "https://www.ucm.es/",
+	// 	researchGroups: [
+	// 		"ISA",
+	// 		"TDG",
+	// 		"Grupo de Computación Natural",
+	// 		"Ciencia de los Materiales"
+	// 	]
+	// });
+	request.get(`${serverURLUni}${baseAPIUni}/universities/${req.params.id}`, (err, resp, body) => {
+		if (err) {
+			console.log('Error: '+err);
+			res.sendStatus(500);
+		} else {
+			// body.researchGroups = ["1", "2"];
+			res.status(resp.statusCode).send(body);
+		}
 	});
 });
 
 // Research groups routes
 app.get(baseAPI + "/groups/:id", (req, res) => {
 	console.log("GET /groups/" + req.params.id);
-	res.send({
-		name: "ISA",
-		id: "1",
-		responsable: "Antonio Ruiz",
-		email: "isagroup.us@gmail.com",
-		components: [
-			"Pablo Fernández",
-			"Antonio Ruiz",
-			"Manolo Resinas"
-		],
-		lineresearch: "REST APIs",
-		_id: "OeZgEeTAh4BfJD3l"
-		});
+	// res.send({
+	// 	name: "ISA",
+	// 	id: "1",
+	// 	responsable: "Antonio Ruiz",
+	// 	email: "isagroup.us@gmail.com",
+	// 	components: [
+	// 		"Pablo Fernández",
+	// 		"Antonio Ruiz",
+	// 		"Manolo Resinas"
+	// 	],
+	// 	lineresearch: "REST APIs",
+	// 	_id: "OeZgEeTAh4BfJD3l"
+	// 	});
+	request.get(`${serverURLRG}${baseAPIRG}/groups/${req.params.id}`, (err, resp, body) => {
+		if (err) {
+			console.log('Error: '+err);
+			res.sendStatus(500);
+		} else {
+			// body[0].components = ["A","B"];
+			res.status(resp.statusCode).send(body[0]);
+		}
+	});
 });
 
 // External API (Sabius) routes
