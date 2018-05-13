@@ -5,26 +5,61 @@ angular
     $routeProvider
     .when("/", {
       templateUrl: "app/views/researchers/researchers.html",
-      controller: "ResearchersCtrl"
+      controller: "ResearchersCtrl",
+      resolve: {
+        checkLogin: checkLogin
+      }
     })
     .when("/researchers", {
       templateUrl: "app/views/researchers/researchers.html",
-      controller: "ResearchersCtrl"
+      controller: "ResearchersCtrl",
+      resolve: {
+        checkLogin: checkLogin
+      }
+    })
+    .when("/login", {
+      templateUrl: "app/views/login/login.html",
+      controller: "LoginCtrl",
+      resolve: {
+        redirectIfAuthenticated: function($rootScope, $location) {
+          if($rootScope.isAuthenticated) {
+            $location.path('/');
+          }
+        }
+      }
     })
     .when("/universities", {
         templateUrl: "app/views/universities/universities.html",
-        controller: "UniversitiesCtrl"
+        controller: "UniversitiesCtrl",
+        resolve: {
+          checkLogin: checkLogin
+        }
     })
     .when("/departments", {
       templateUrl: "app/views/departments/departments.html",
-      controller: "DepartmentsCtrl"
+      controller: "DepartmentsCtrl",
+      resolve: {
+        checkLogin: checkLogin
+      }
     })
     .when("/graphs", {
       templateUrl: "app/views/graphs/graphs.html",
-      controller: "GraphsCtrl"
+      controller: "GraphsCtrl",
+      resolve: {
+        checkLogin: checkLogin
+      }
     })
     .otherwise({
       templateUrl: "app/views/researchers/researchers.html",
-      controller: "ResearchersCtrl"
+      controller: "ResearchersCtrl",
+      resolve: {
+        checkLogin: checkLogin
+      }
     })
+
+    function checkLogin($rootScope, $location) {   
+      if(!$rootScope.isAuthenticated) { 
+        $location.path('/login');
+      }
+    }
   });

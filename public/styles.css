@@ -8,6 +8,14 @@ body {
   }
 }
 
+#my-signin2 > div {
+  margin: auto;
+}
+
+.loading-gif {
+  height: 128px;
+}
+
 img.expand-arrow {
   height: 12px;
   cursor: pointer;

@@ -1,0 +1,15 @@
+<meta name="google-signin-client_id" content="1044177619160-ojp05ob28ae05fofpi0fls1t8geoalv5.apps.googleusercontent.com">
+
+<div class="container">
+  <h1 class="display-4 text-center mt-5">Log in</h1>
+  <p class="lead text-center">Log in with Google to access the app.</p>
+  <div id="my-signin2" class="mt-5"></div>
+  <div class="text-center mt-3">{{redirectMessage}}</div>
+  <div class="row">
+    <div class="col-12 text-center">
+      <img class="loading-gif" src="./static/img/loading.gif" ng-show="isAuthenticated" />
+    </div>
+  </div>
+</div>
+
+<script src="https://apis.google.com/js/platform.js?onload=appStart" async defer></script>
