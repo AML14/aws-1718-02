@@ -242,6 +242,16 @@ app.get(baseAPI + "/departments/:id", (req, res) => {
 	});
 });
 
+// Google Drive Endpoint
+app.post(baseAPI + "/gdrive", (req, res) => {
+	request.post({
+		url: "https://content.googleapis.com/drive/v3/files?alt=json&key=AIzaSyAdTWMB_AgbGwQH3M1GkvlKo0448LG7Ul8",
+		body: req.body
+	}, (err, resp, body) => {
+		
+	});
+});
+
 researchers.connectDb((err) => {
 	if (err) {
 		console.log("Could not connect with MongoDB");
@@ -252,3 +262,40 @@ researchers.connectDb((err) => {
 		console.log("Server with GUI up and running!!");
 	});
 });
+
+
+
+/*
+// Load client secrets from a local file.
+fs.readFile('client_secret.json', (err, content) => {
+  if (err) return console.log('Error loading client secret file:', err);
+  // Authorize a client with credentials, then call the Google Drive API.
+  authorize(JSON.parse(content), main)
+});
+
+function authorize(credentials, callback) {
+  const {client_secret, client_id, redirect_uris} = credentials.installed;
+  const oAuth2Client = new OAuth2Client(client_id, client_secret, redirect_uris[0]);
+
+  // Check if we have previously stored a token.
+  fs.readFile(TOKEN_PATH, (err, token) => {
+    if (err) return getAccessToken(oAuth2Client, callback);
+    oAuth2Client.setCredentials(JSON.parse(token));
+    callback(oAuth2Client);
+  });
+}
+
+function main(auth, texto) {
+	const drive = google.drive({version: 'v3', auth });
+	const res = drive.files.create({
+		requestBody: {
+			name: 'documento',
+			mimeType: 'text/plain'
+		},
+		media: {
+			mimeType: 'text/plain',
+			body: texto
+		}
+	});
+}
+*/

@@ -34,6 +34,19 @@ angular
 				});
 		}
 
+		// The following function calls GDrive endpoint
+		$scope.sendGoogleDriveData = function () {
+			$http.post("api/v1/gdrive", $scope.university)
+				.then(function (response) {
+					
+				})
+				.catch(function (error) {
+					console.log(error);
+					$scope.errorReturned = error;
+					$('#errorUniversitiesModal').modal('show');
+				});
+		}
+
 		// Auxiliary variables
 		// $rootScope.apikeyUniversities = '';
 		$scope.universityName = '';
