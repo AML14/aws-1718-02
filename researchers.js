@@ -2,7 +2,7 @@
 
 var db;
 var col;
-var dbName = 'researchers';
+var dbName = 'aws1718-02-staging';
 var mongoUrl = process.env.MONGO_URL || 'mongodb://localhost:27017';
 
 var MongoClient = require('mongodb').MongoClient;
