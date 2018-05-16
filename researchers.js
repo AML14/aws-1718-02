@@ -2,7 +2,12 @@
 
 var db;
 var col;
-var dbName = 'aws1718-02';
+var dbName;
+if (process.env.NODE_ENV === "production") {
+	dbName = 'aws1718-02';
+} else {
+	dbName = 'aws1718-02-staging';
+}
 var mongoUrl = process.env.MONGO_URL || 'mongodb://localhost:27017';
 
 var MongoClient = require('mongodb').MongoClient;
