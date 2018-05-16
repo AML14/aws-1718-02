@@ -212,7 +212,7 @@ app.get(baseAPI + "/groups/:id", (req, res) => {
 			res.sendStatus(500);
 		} else {
 			// body[0].components = ["A","B"];
-			res.status(resp.statusCode).send(body[0]);
+			res.status(resp.statusCode).send(body);
 		}
 	});
 });
