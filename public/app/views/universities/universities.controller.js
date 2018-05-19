@@ -43,7 +43,6 @@ angular
 			gapi.client.drive.files.create({
 				resource: fileMetadata
 			}).then(function(response) {
-				console.log(response);
 				$http.patch(
 					'https://www.googleapis.com/upload/drive/v3/files/'+response.result.id+'?uploadType=media',
 					"University: "+$scope.university.name+"\n"+
@@ -60,7 +59,6 @@ angular
 					}
 				)
 				.then(function (response) {
-					console.log(response);
 					$('#gDriveModal').modal('show');
 				})
 				.catch(function (error) {
