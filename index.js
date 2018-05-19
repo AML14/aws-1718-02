@@ -172,7 +172,7 @@ app.get(baseAPI + "/universities/:id", (req, res) => {
 	// 	fax: 914520400,
 	// 	mail: "infocom@ucm.es",
 	// 	web: "https://www.ucm.es/",
-	// 	researchGroups: [
+	// 	groups: [
 	// 		"ISA",
 	// 		"TDG",
 	// 		"Grupo de Computación Natural",
@@ -184,7 +184,7 @@ app.get(baseAPI + "/universities/:id", (req, res) => {
 			console.log('Error: '+err);
 			res.sendStatus(500);
 		} else {
-			// body.researchGroups = ["1", "2"];
+			// body.groups = ["1", "2"];
 			res.status(resp.statusCode).send(body);
 		}
 	});
