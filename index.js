@@ -179,7 +179,7 @@ app.get(baseAPI + "/universities/:id", (req, res) => {
 	// 		"Ciencia de los Materiales"
 	// 	]
 	// });
-	request.get(`${serverURLUni}${baseAPIUni}/universities/${req.params.id}`, (err, resp, body) => {
+	request.get(`${serverURLUni}${baseAPIUni}/universities/${req.params.id}?apikey=123456`, (err, resp, body) => {
 		if (err) {
 			console.log('Error: '+err);
 			res.sendStatus(500);
@@ -206,7 +206,7 @@ app.get(baseAPI + "/groups/:id", (req, res) => {
 	// 	lineresearch: "REST APIs",
 	// 	_id: "OeZgEeTAh4BfJD3l"
 	// 	});
-	request.get(`${serverURLRG}${baseAPIRG}/groups/${req.params.id}`, (err, resp, body) => {
+	request.get(`${serverURLRG}${baseAPIRG}/groups/${req.params.id}?apikey=asdfg`, (err, resp, body) => {
 		if (err) {
 			console.log('Error: '+err);
 			res.sendStatus(500);

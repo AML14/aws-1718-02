@@ -28,8 +28,8 @@
     <li class="list-group-item"><b>Email:</b> {{university.mail}}</li>
     <li class="list-group-item"><b>Website:</b> {{university.web}}</li>
     <li class="list-group-item"><b>Research groups:</b></li>
-    <div ng-repeat="researchGroup in university.researchGroups">
-      <li class="list-group-item rg"><a href="" ng-click="getResearchGroupAndShowModal(researchGroup);">{{researchGroup}}</a></li>
+    <div ng-repeat="group in university.groups">
+      <li class="list-group-item rg"><a href="" ng-click="getResearchGroupAndShowModal(group);">{{group}}</a></li>
     </div>
   </ul>
 </div>
@@ -47,7 +47,7 @@
           <button type="button" class="close" data-dismiss="modal">&times;</button>
         </div>
         <div class="modal-body">
-          <div ng-repeat="member in selectedResearchGroup.components">
+          <div ng-repeat="member in selectedResearchGroup.componentes">
             <p>{{member}}</p>
           </div>
         </div>

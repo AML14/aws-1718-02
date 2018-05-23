@@ -9,7 +9,7 @@ angular
 		// API functions
 
 		$scope.getUniversity = function () {
-			$http.get("api/v1/universities/"+$scope.universityName+"?apikey=123456")
+			$http.get("api/v1/universities/"+$scope.universityName)
 				.then(function (response) {
 					$scope.university = response.data;
 				})
@@ -24,7 +24,7 @@ angular
 		$scope.getResearchGroupAndShowModal = function (researchGroup) {
 			$http.get("api/v1/groups/"+researchGroup)
 				.then(function (response) {
-					$scope.selectedResearchGroup = response.data;
+					$scope.selectedResearchGroup = response.data[0];
 					$('#researchGroupModal').modal('show');
 				})
 				.catch(function (error) {
@@ -51,7 +51,7 @@ angular
 					"Fax: "+$scope.university.fax+"\n"+
 					"Email: "+$scope.university.mail+"\n"+
 					"Website: "+$scope.university.web+"\n"+
-					"Research groups: "+$scope.university.groups,
+					"Research groups: "+$scope.university.groups.join(", "),
 					{
 						headers: {
 							'Authorization': 'Bearer ' + gapi.auth.getToken().access_token
