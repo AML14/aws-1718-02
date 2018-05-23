@@ -115,7 +115,7 @@ angular
         })
         .attr("font-family", "sans-serif")
         .attr("font-size", function(d){
-          return d.r/8;
+          return d.r/9;
         })
         .attr("fill", "black");
   
